@@ -8,6 +8,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+      // World-class engineer's solution for suppressing 3rd party warnings in CDN-based prototypes
+      (function() {
+        const originalWarn = console.warn;
+        console.warn = function(...args) {
+          if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
+            return;
+          }
+          originalWarn.apply(console, args);
+        };
+      })();
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -25,10 +37,20 @@
               },
               secondary: '#53565A',
               dark: {
-                bg: '#111827',
-                card: '#1F2937',
-                text: '#F9FAFB',
-                muted: '#9CA3AF'
+                bg: '#0F172A',
+                card: '#1E293B',
+                text: '#F8FAFC',
+                muted: '#94A3B8'
+              }
+            },
+            animation: {
+              'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'float': 'float 3s ease-in-out infinite',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
               }
             }
           }
@@ -36,7 +58,6 @@
       }
     </script>
     <style>
-      /* Custom scrollbar for cleaner look */
       ::-webkit-scrollbar {
         width: 8px;
         height: 8px;
@@ -49,10 +70,22 @@
         border-radius: 4px;
       }
       .dark ::-webkit-scrollbar-thumb {
-        background: #4b5563;
+        background: #334155;
       }
       ::-webkit-scrollbar-thumb:hover {
         background: #94a3b8;
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      /* Smooth transitions for theme switching */
+      * {
+        transition-property: background-color, border-color, color, fill, stroke;
+        transition-duration: 200ms;
       }
     </style>
   <script type="importmap">
@@ -62,12 +95,13 @@
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
-    "recharts": "https://aistudiocdn.com/recharts@^3.4.1"
+    "recharts": "https://aistudiocdn.com/recharts@^3.4.1",
+    "@google/genai": "https://esm.run/@google/genai"
   }
 }
 </script>
 </head>
-  <body class="bg-gray-50 dark:bg-dark-bg text-gray-900 dark:text-dark-text transition-colors duration-300 antialiased">
+  <body class="bg-slate-50 dark:bg-dark-bg text-slate-900 dark:text-dark-text antialiased selection:bg-primary/30">
     <div id="root"></div>
   </body>
 </html>

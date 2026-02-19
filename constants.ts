@@ -69,6 +69,10 @@ export const TRANSLATIONS: Translations = {
   textSize: { en: 'Text Size', ar: 'حجم النص' },
   grayscale: { en: 'Grayscale', ar: 'تدرج الرمادي' },
   reset: { en: 'Reset', ar: 'إعادة تعيين' },
+  aiAssistant: { en: 'Smart Finance Advisor', ar: 'مستشار مالي ذكي' },
+  aiWelcome: { en: 'Hi Khalid! I can help you with your Qatar Foundation payments. How can I assist you today?', ar: 'مرحباً خالد! يمكنني مساعدتك في مدفوعات مؤسسة قطر الخاصة بك. كيف يمكنني خدمتك اليوم؟' },
+  typeMessage: { en: 'Type your question...', ar: 'اكتب سؤالك هنا...' },
+  aiThinking: { en: 'Thinking...', ar: 'جاري التفكير...' },
 };
 
 export const MOCK_ACCOUNTS: { [key: string]: AccountData } = {
