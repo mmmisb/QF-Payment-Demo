@@ -4,15 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QF PayMaster Portal</title>
-    <link rel="icon" type="image/x-icon" href="https://www.qf.org.qa/app/themes/qf/assets/images/favicon.ico">
+    <!-- Use a Data URI for favicon to prevent CORB issues on restricted domains -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💎</text></svg>">
     
-    <!-- Suppress Tailwind CDN production warning immediately -->
+    <!-- Robust suppression of Tailwind CDN production warning -->
     <script>
       (function() {
-        const _warn = console.warn;
-        console.warn = function(...args) {
-          if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
-          _warn.apply(console, args);
+        const originalWarn = console.warn;
+        const originalLog = console.log;
+        const filter = (args) => {
+          const msg = args[0];
+          if (typeof msg === 'string' && (msg.includes('cdn.tailwindcss.com') || msg.includes('production'))) {
+            return true;
+          }
+          return false;
+        };
+        console.warn = function() {
+          if (filter(arguments)) return;
+          originalWarn.apply(console, arguments);
+        };
+        console.log = function() {
+          if (filter(arguments)) return;
+          originalLog.apply(console, arguments);
         };
       })();
     </script>
@@ -102,6 +115,6 @@
 </head>
   <body class="bg-slate-50 dark:bg-dark-bg text-slate-900 dark:text-dark-text antialiased selection:bg-primary/30">
     <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
+    <script type="module" src="./index.tsx"></script>
   </body>
 </html>
