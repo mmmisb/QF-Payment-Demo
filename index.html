@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>QF PayMaster Portal</title>
     <link rel="icon" type="image/x-icon" href="https://www.qf.org.qa/app/themes/qf/assets/images/favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Suppress Tailwind CDN production warning immediately -->
     <script>
-      // World-class engineer's solution for suppressing 3rd party warnings in CDN-based prototypes
       (function() {
-        const originalWarn = console.warn;
+        const _warn = console.warn;
         console.warn = function(...args) {
-          if (typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com should not be used in production')) {
-            return;
-          }
-          originalWarn.apply(console, args);
+          if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+          _warn.apply(console, args);
         };
       })();
     </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -82,7 +82,6 @@
         -ms-overflow-style: none;
         scrollbar-width: none;
       }
-      /* Smooth transitions for theme switching */
       * {
         transition-property: background-color, border-color, color, fill, stroke;
         transition-duration: 200ms;
